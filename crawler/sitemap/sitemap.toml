@@ -1,0 +1,23 @@
+[home]
+categories="//*[contains(@class, 'departmentLinks')]/a"
+    [home.category]
+    link="./@href"
+    name="./text()"
+
+[category]
+pages="//*[contains(@class, 'pagination')]/*/*/text()[not(contains(., '<')) and not(contains(., '...')) and not(contains(., '>'))]"
+products="//*[contains(@class, 'productCard')]/a"
+
+    [category.product]
+    link="./@href"
+
+[product_page]
+values_block="//*[@id='blocoValores']"
+
+    [product_page.values]
+    original="/*/*/span/text()"
+    main=""
+    defer=""
+
+
+    
