@@ -2,4 +2,4 @@ import toml
 
 # TODO: import "data type" classes
 
-sitemap = {}
+sitemap: dict = toml.load('sitemap.toml')

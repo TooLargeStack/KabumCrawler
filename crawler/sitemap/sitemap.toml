@@ -15,9 +15,6 @@ products="//*[contains(@class, 'productCard')]/a"
 values_block="//*[@id='blocoValores']"
 
     [product_page.values]
-    original="/*/*/span/text()"
+    original="./*/*/span/text()"
     main=""
     defer=""
-
-
-    
