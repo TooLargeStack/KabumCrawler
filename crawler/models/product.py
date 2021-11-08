@@ -1,7 +1,10 @@
 from types import resolve_bases
-from sitemap import sitemap
+from crawler.sitemap import sitemap
 from scrapy.responsetypes import Response
 from scrapy.selector import Selector
+
+
+# TODO: impl product response model
 
 
 class Product():

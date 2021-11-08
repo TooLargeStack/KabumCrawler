@@ -1,27 +1,35 @@
 from logging import Logger
 from typing import List
 
-from sitemap import sitemap
+from crawler.sitemap import sitemap
 from scrapy.responsetypes import Response
 from scrapy.selector import Selector
 
+from crawler.models.response_model import ResponseModel
 
-class Category:
 
-    sitemap_name = 'category'
+class Category(ResponseModel):
 
-    def __init__(self, response: Response) -> None:
-        self.response = response
-        self.sitemap = sitemap.get(self.sitemap_name, {})
+    name = 'category'
 
-        self._values: Selector = self.response.xpath(
-            self.sitemap['values_block']
-        )
+    def __init__(self, response) -> None:
+        super().__init__(response=response)
 
     @property
-    def categories(self) -> List[Selector]:
-        return self.response.xpath(
-            self.sitemap['categories']
+    def pages(self) -> List[Selector]:
+        return self.response.xpath(self.sitemap.pages)
+        
+    @property
+    def products(self) -> List[Selector]:
+        return self.response.xpath(self.sitemap.products)
+
+    def get_product_link(self, product: Selector) -> str:
+        return self.response.urljoin(
+            product.xpath(
+                self.sitemap.products_links
+            ).get(
+                default=''
+            )
         )
 
 # End Of File

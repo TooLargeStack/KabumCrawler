@@ -1,32 +1,33 @@
-from typing import Union
+from typing import Union, List
 
-from sitemap import sitemap
+from crawler.sitemap import sitemap
 from scrapy.responsetypes import Response
 from scrapy.selector import Selector
 
+from crawler.models.response_model import ResponseModel
 
-class Home:
+
+class Home(ResponseModel):
     
-    sitemap_name = 'home_page'
+    name = 'home'
 
-    def __init__(self, response: Union[Response, Response]) -> None:
-        self.response = response
-        self.sitemap = sitemap.get(self.sitemap_name, {})
+    def __init__(self, response) -> None:
+        super().__init__(response=response)
 
-        self._values: Selector = self.response.xpath(
-            self.sitemap['values_block']
+    @property
+    def categories(self) -> List[Selector]:
+        return self.response.xpath(self.sitemap.categories)
+
+    def get_category_link(self, category: Selector) -> str:
+        return self.response.urljoin(
+            category.xpath(
+                self.sitemap.link
+            ).get(
+                default=''
+            )
         )
 
-    @property
-    def categories(self) -> Selector:
-        pass
-
-    @property
-    def categories_links(self) -> str:
-        pass
-
-    @property
-    def category_name(self) -> str:
-        pass
+    def get_category_name(self, category: Selector) -> str:
+        return category.xpath(self.sitemap.name).get(default='')
 
 # End Of File
