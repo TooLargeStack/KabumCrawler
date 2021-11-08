@@ -43,4 +43,8 @@ def sitemap_constructor(sitemap_data: dict) -> SiteMap:
 
 sitemap: SiteMap = sitemap_constructor(sitemap_data=__sitemap_data)
 
+__all__ = [
+    'sitemap'
+]
+
 # End Of File

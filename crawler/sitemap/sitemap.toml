@@ -11,8 +11,6 @@ products_links="./@href"
 
 [product]
 values_block="//*[@id='blocoValores']"
-
-    # [product_page.values]
 original="./*/*/span/text()"
 main=""
 defer=""
