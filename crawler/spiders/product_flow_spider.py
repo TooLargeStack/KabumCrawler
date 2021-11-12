@@ -2,7 +2,7 @@ from scrapy.http.request import Request
 from scrapy.responsetypes import Response
 import scrapy
 
-from crawler.models import Home, Category, Product
+from crawler.models import Home, Category, Product, product
 
 
 class ProductFlowSpiderSpider(scrapy.Spider):
@@ -34,10 +34,34 @@ class ProductFlowSpiderSpider(scrapy.Spider):
             )
 
     def access_category(self, response: Response):
-        print(response.url)
-        text = response.text
+        # import ipdb; ipdb.set_trace()
         category = self.category_model(response=response)
-        for page in category.pages:
-            pass
+        for page_link in category.get_pages_links():
+            yield Request(
+                url=page_link,
+                callback=self.access_products
+            )
+
+    def access_products(self, response: Response):
+        # import ipdb; ipdb.set_trace()
+        category = self.category_model(response=response)
+        for product_link in category.get_products_links():
+            yield Request(
+                url=self.base_url + product_link.lstrip('/'),
+                callback=self.get_product_data
+            )
+
+    def get_product_data(self, response: Response):
+        product = self.product_model(response=response)
+        # import ipdb; ipdb.set_trace()
+        self.logger.debug(
+            f"original: {product.original_price} | "
+            f"main: {product.main_price}"
+            f"defer: {product.defer_price}"
+        )
+        if product.unavailable:
+            self.logger.warning(
+                f"product unavailable: {response.url}"
+            )
 
 # End Of File
