@@ -6,10 +6,14 @@ authors = ["JPBeckner <pedrobeckner@hotmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Scrapy = "2.5"
+Scrapy = "^2.5"
 toml = "^0.10.2"
 
 [tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+ipdb = "^0.13.9"
+ipython = "^7.29.0"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
