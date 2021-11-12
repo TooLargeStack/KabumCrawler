@@ -9,7 +9,8 @@ from crawler.models.response_model import ResponseModel
 
 class Home(ResponseModel):
     
-    name = 'home'
+    name: str = 'home'
+    sitemap: sitemap.home
 
     def __init__(self, response) -> None:
         super().__init__(response=response)
