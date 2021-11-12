@@ -10,6 +10,7 @@ products="//*[contains(@class, 'productCard')]/a"
 products_links="./@href"
 
 [product]
+unavailable="//*[@id='formularioProdutoIndisponivel']"
 values_block="//*[@id='blocoValores']"
 original="./*/*/span/text()"
 main=""

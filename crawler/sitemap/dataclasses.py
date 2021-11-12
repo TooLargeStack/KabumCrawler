@@ -26,6 +26,7 @@ class Product:
 
     name = 'product'
 
+    unavailable: str
     values_block: str
     original: str
     main: str
