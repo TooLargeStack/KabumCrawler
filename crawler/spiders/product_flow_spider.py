@@ -53,15 +53,21 @@ class ProductFlowSpiderSpider(scrapy.Spider):
 
     def get_product_data(self, response: Response):
         product = self.product_model(response=response)
-        # import ipdb; ipdb.set_trace()
         self.logger.debug(
             f"original: {product.original_price} | "
-            f"main: {product.main_price}"
+            f"main: {product.main_price} | "
             f"defer: {product.defer_price}"
         )
         if product.unavailable:
             self.logger.warning(
                 f"product unavailable: {response.url}"
             )
+            return
+        yield {
+            'name': product.title,
+            "defer_price": product.defer_price,
+            "main_price": product.main_price,
+            "original_price": product.original_price
+        }
 
 # End Of File
