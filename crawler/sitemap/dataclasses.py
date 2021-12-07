@@ -30,7 +30,8 @@ class Product:
     values_block: str
     original: str
     main: str
-    defer: str
+    deferred: str
+    title: str
 
 
 @dataclass
