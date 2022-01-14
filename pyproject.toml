@@ -1,14 +1,16 @@
 [tool.poetry]
-name = "kabumcrawler"
+name = "kabumCrawler"
 version = "0.1.0"
 description = "Web Crawler made in Python for the Kabum website."
 authors = ["JPBeckner <pedrobeckner@hotmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Scrapy = "2.5"
+scrapy = "2.5"
+toml = "^0.10.2"
 
 [tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
