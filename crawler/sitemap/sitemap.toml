@@ -1,0 +1,18 @@
+[home]
+categories="//*[contains(@class, 'departmentLinks')]/a"
+    # [home.category]
+link="./@href"
+name="./text()"
+
+[category]
+pages="//*[contains(@class, 'pagination')]/*/*/text()[not(contains(., '<')) and not(contains(., '...')) and not(contains(., '>'))]"
+products="//*[contains(@class, 'productCard')]/a"
+products_links="./@href"
+
+[product]
+unavailable="//*[@id='formularioProdutoIndisponivel']"
+values_block="//*[@id='blocoValores']"
+original="./*/*/span/text()"
+main="./*/*/*[@itemprop='price']/text()"
+deferred="./div[3]/b/text()"
+title="//*[contains(@itemtype, 'Product')]/*/*[@itemprop='name']/text()"
